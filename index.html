@@ -2782,20 +2782,27 @@
       return 'CHARCRIS-' + (suffix || Math.random().toString(36).slice(2, 10).toUpperCase());
     }
 
-    function buildReferralLink(code) {
-      if (!code) return '';
-      // Le lien est toujours construit avec l'adresse locale/courante du fichier.
-      // Aucun domaine fixe n'est imposé : le lien s'adapte automatiquement à l'endroit
-      // où le fichier HTML est hébergé (localhost, GitHub Pages, hébergement, etc.).
-      const base = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
-        ? window.location.origin + window.location.pathname
-        : window.location.href.split('?')[0].split('#')[0];
-      return base + '?ref=' + encodeURIComponent(code);
+    function getCurrentPlatformUrl() {
+      // Utilise l'adresse réelle de la page ouverte : localhost en test,
+      // GitHub Pages après publication, ou le domaine de votre hébergeur.
+      // pathname conserve aussi le sous-dossier éventuel de GitHub Pages.
+      if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+        return window.location.origin + window.location.pathname;
+      }
+      return window.location.href.split('?')[0].split('#')[0];
     }
 
-    function updateReferralUI(code, link) {
-      const finalCode = code || '';
-      const finalLink = link || (finalCode ? buildReferralLink(finalCode) : '');
+    function buildReferralLink(code) {
+      if (!code) return '';
+      const base = getCurrentPlatformUrl();
+      return base + '?ref=' + encodeURIComponent(String(code).trim());
+    }
+
+    function updateReferralUI(code, savedLink) {
+      const finalCode = String(code || '').trim();
+      // Ne pas réutiliser un ancien lien enregistré (par exemple localhost) :
+      // on le reconstruit toujours avec le domaine où la plateforme est ouverte.
+      const finalLink = finalCode ? buildReferralLink(finalCode) : '';
       const codeInput = document.getElementById('personal-code');
       const linkInput = document.getElementById('invite-link');
       if (codeInput) codeInput.value = finalCode;
