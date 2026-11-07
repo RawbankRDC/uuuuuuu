@@ -1125,6 +1125,11 @@ button:focus-visible,a:focus-visible,[role="button"]:focus-visible{outline:3px s
 }
 </style>
 
+
+<style>
+.claim-revenue-btn{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:11px 16px;border:1.5px solid #0b67c2;border-radius:10px;background:#fff;color:#0b67c2;font-weight:700;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.claim-revenue-btn:disabled{opacity:.65;cursor:wait}
+</style>
 </head>
 
 <!-- Overlay global de traitement : flou + rotation -->
@@ -1328,13 +1333,14 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.close
 </header>
 
 <div class="floating-socials">
-  <a href="https://chat.whatsapp.com/B6nFKtRnblm494SqqHQA4V?s=cl&p=a&iam=2" target="_blank" class="social-float-btn whatsapp-float" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://chat.whatsapp.com/Ic16IhVodVsEGvsK46sqF3?s=cl&p=a&iam=2" target="_blank" rel="noopener" class="social-float-btn whatsapp-float" title="Communauté WhatsApp" aria-label="Ouvrir la communauté WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://t.me/" target="_blank" rel="noopener" class="social-float-btn telegram-float" title="Ouvrir Telegram — canal DCI à configurer" aria-label="Ouvrir Telegram"><i class="fa-brands fa-telegram"></i></a>
 </div>
 
 <main id="viewAccueil" class="container main-view">
   <div class="hero">
-    <h1>Votre espace personnel</h1>
-    <p>Consultez votre solde, vos opérations et les solutions disponibles depuis une interface simple et moderne.</p>
+    <h1>DCI — Développement Congo Invest</h1>
+    <p>Bienvenue dans votre espace personnel. Consultez votre solde, vos opérations et les programmes disponibles.</p>
   </div>
 
   <div class="balance">
@@ -1347,19 +1353,26 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.close
     <button class="action" onclick="switchTab('withdraw')"><i class="fa-solid fa-money-bill-transfer"></i><span>Demander un retrait</span></button>
   </div>
 
+<div class="dci-home-shortcuts" aria-label="Raccourcis rapides DCI">
+<button class="dci-shortcut" type="button" onclick="switchTab('profileDeposits')"><i class="fa-solid fa-arrow-down-to-line"></i><span><b>Historique des dépôts</b><small>Consulter mes dépôts</small></span></button>
+<button class="dci-shortcut" type="button" onclick="switchTab('profileWithdrawals')"><i class="fa-solid fa-arrow-up-from-line"></i><span><b>Historique des retraits</b><small>Suivre mes demandes</small></span></button>
+<button class="dci-shortcut" type="button" onclick="openDciGuide()"><i class="fa-solid fa-book-open"></i><span><b>Guide d'utilisation</b><small>Comment fonctionne DCI</small></span></button>
+<button class="dci-shortcut" type="button" onclick="openDciFaq()"><i class="fa-solid fa-circle-question"></i><span><b>Questions fréquentes</b><small>Obtenir des réponses</small></span></button>
+</div>
+
 
 
 
   <section class="dci-activity-demo dci-sample-feed" id="dciSampleFeed" aria-labelledby="dciSampleTitle">
     <div class="dci-activity-head">
       <div class="dci-activity-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
-      <div><h2 id="dciSampleTitle">Flux d’activités</h2><p>Notifications animées de démonstration avec les numéros masqués.</p></div>
-      <span class="dci-demo-badge" style="background:#fff0c2;color:#714b00">REEL</span>
+      <div><h2 id="dciSampleTitle">Flux d’activités</h2><p>Exemples animés de notifications avec les numéros masqués.</p></div>
+      <span class="dci-demo-badge" style="background:#fff0c2;color:#714b00">DÉMO</span>
     </div>
     <div class="dci-activity-window" aria-label="Exemples animés de notifications">
       <div id="dciSampleList" class="dci-activity-list"></div>
     </div>
-    <p class="dci-activity-foot"><i class="fa-solid fa-circle-info"></i> une meilleure plateforme: ces notifications sont des justification de la plateformeet.</p>
+    <p class="dci-activity-foot"><i class="fa-solid fa-circle-info"></i> Ces notifications sont des exemples de démonstration ; elles ne représentent pas des opérations réelles en direct.</p>
   </section>
 
 
@@ -1651,6 +1664,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.close
     <div class="copy-box"><input id="refCodeDisplay" type="text" readonly><button class="copy-btn" onclick="copyRef()">Copier</button></div>
     <label style="margin-top:12px">Lien d'invitation</label>
     <div class="copy-box"><input id="refLinkDisplay" type="text" readonly><button class="copy-btn" onclick="copyLink()">Copier</button></div>
+<button class="team-whatsapp-share" type="button" onclick="shareDciReferralWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Partager mon invitation sur WhatsApp</button>
   </div>
 
   <div class="section team-level-card" data-level="1">
@@ -1797,7 +1811,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.close
     <h2><i class="fa-solid fa-headset"></i> Service client</h2>
     <p style="color:var(--muted);font-size:12px;margin:0 0 14px">Notre service client est disponible pour vous accompagner et répondre à vos questions.</p>
 
-    <a href="https://chat.whatsapp.com/B6nFKtRnblm494SqqHQA4V?s=cl&p=a&iam=2" target="_blank" class="account-action" style="width:100%;text-decoration:none;margin-bottom:10px">
+    <a href="https://chat.whatsapp.com/Ic16IhVodVsEGvsK46sqF3?s=cl&p=a&iam=2" target="_blank" class="account-action" style="width:100%;text-decoration:none;margin-bottom:10px">
       <i class="fa-brands fa-whatsapp" style="color:#0876d8"></i><span><b>Service client WhatsApp</b><span>Contacter l'assistance sur WhatsApp</span></span>
     </a>
   </div>
@@ -1889,7 +1903,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.close
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteField, collection, query, where, getDocs, onSnapshot, arrayUnion, writeBatch, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteField, collection, query, where, getDocs, onSnapshot, arrayUnion, writeBatch, serverTimestamp, runTransaction, addDoc } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAUNabZWJcdsp3tO1K6MaRBbEauELGWlbc",
@@ -2602,7 +2616,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.close
       }
 
       // Revenus produits : gains quotidiens uniquement.
-      if(type.includes('gain quotidien')){
+      if(type.includes('gain quotidien') || type.includes('revenu quotidien')){
         if(tx.status !== 'Rejeté') productIncome += amount;
         return;
       }
@@ -2729,14 +2743,26 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.close
    });
 
    u.activeInvestments.forEach((inv, index) => {
-    let nextPayout = inv.lastCheck + (24 * 60 * 60 * 1000);
-    let diff = Math.max(0, nextPayout - Date.now());
-    let h = Math.floor(diff / (1000 * 60 * 60));
-    let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    let s = Math.floor((diff % (1000 * 60)) / 1000);
-    let timeStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-
-    investmentsHtml += `<div class="clean-tx-card"><div class="clean-tx-info"><h4>${inv.name} <span class="success">Produit activé</span></h4><small>Montant : ${Number(inv.amount||0).toLocaleString()} FC • Projection journalière : ${Number(inv.dailyGain||0).toLocaleString()} FC/j</small></div><div class="clean-tx-right"><span class="clean-tx-amount neutral" id="inv-timer-${index}">${timeStr}</span><small style="color:var(--muted); font-size:10px;">Compte à rebours du cycle de 24 h</small></div></div>`;
+    const asMillis = value => value && typeof value.toMillis === 'function' ? value.toMillis() : (value && typeof value.toDate === 'function' ? value.toDate().getTime() : (typeof value === 'string' && isNaN(Number(value)) ? (Date.parse(value)||0) : Number(value||0)));
+    const activatedAt = asMillis(inv.activatedAt || inv.startTime || 0);
+    const lastClaimAt = asMillis(inv.lastClaimAt || inv.lastCheck || activatedAt);
+    const nextPayout = lastClaimAt + 24 * 60 * 60 * 1000;
+    const diff = Math.max(0, nextPayout - Date.now());
+    const h = Math.floor(diff / 3600000), m = Math.floor((diff % 3600000) / 60000), sec = Math.floor((diff % 60000) / 1000);
+    const isPending = !!inv.pendingClaimId;
+    const timeStr = isPending ? 'En attente de validation' : (diff <= 0 ? 'Prêt à réclamer' : `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`);
+    const days = Number(inv.durationDays || 35), claimed = Number(inv.claimedDays || inv.creditedCycles || 0);
+    const dailyGain = Number(inv.dailyGain || 0);
+    const available = diff <= 0 && claimed < days && inv.status !== 'completed' && !isPending && dailyGain > 0;
+    const invId = String(inv.id || inv.depositId || '');
+    const timerLabel = isPending
+      ? 'Demande envoyée — validation nécessaire'
+      : (diff <= 0 ? 'Revenu disponible à réclamer' : 'Prochain cycle');
+    const safeInvId = invId.replace(/&/g,'&amp;').replace(/\"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const claimButton = available
+      ? `<button class="claim-revenue-btn" data-investment-id="${safeInvId}" onclick="window.claimInvestmentRevenue(this.dataset.investmentId,this)"><i class="fa-solid fa-hand-holding-dollar"></i> Réclamer les revenus</button>`
+      : '';
+    investmentsHtml += `<div class="clean-tx-card" style="display:block"><div style="display:flex;justify-content:space-between;gap:10px"><div class="clean-tx-info"><h4>${inv.name} <span class="success">Produit actif</span></h4><small>Montant : ${Number(inv.amount||0).toLocaleString()} FC • Revenu affiché : ${Number(inv.dailyGain||0).toLocaleString()} FC/j</small><br><small>Cycle ${claimed} / ${days}</small></div><div class="clean-tx-right"><span class="clean-tx-amount neutral" id="inv-timer-${index}">${timeStr}</span><small style="color:var(--muted);font-size:10px" id="inv-timer-label-${index}">${timerLabel}</small></div></div><div id="inv-claim-area-${index}">${claimButton}</div><div class="info" style="margin-top:10px">La réclamation est envoyée pour validation. Le solde ne sera crédité qu’après confirmation sécurisée côté serveur.</div></div>`;
    });
 
    document.getElementById('profileRecharges').innerHTML = rechargesHtml || 'Aucun dépôt ou bonus enregistré.';
@@ -3031,9 +3057,76 @@ selectedPlanData = { name, amount, dailyGain };
    }
   };
 
+  window.claimInvestmentRevenue = async function(investmentId, button){
+    const user = getUserData();
+    const originalButton = button ? button.innerHTML : '';
+    if(!auth.currentUser){ alert('Votre session a expiré. Reconnectez-vous avec votre compte existant.'); return; }
+    if(!user || !user.phone){ alert('Numéro du compte introuvable. Déconnectez-vous puis reconnectez-vous avec votre numéro habituel.'); return; }
+    if(!investmentId){ alert('Identifiant du produit introuvable. Actualisez la page.'); return; }
+    if(button){ button.disabled=true; button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Envoi en cours…'; button.setAttribute('aria-busy','true'); }
+    try{
+      const userRef=doc(db,'users',String(user.phone));
+      // Relire le profil pour ne pas dépendre des anciennes données gardées dans le navigateur.
+      const userSnap=await getDoc(userRef);
+      if(!userSnap.exists()) throw new Error('Profil introuvable dans users/'+String(user.phone)+'. Vérifiez que votre compte existant utilise bien ce numéro.');
+      const freshUser=userSnap.data();
+      const investments=Array.isArray(freshUser.activeInvestments)?freshUser.activeInvestments:[];
+      const inv=investments.find(v=>String(v.id||v.depositId||'')===String(investmentId));
+      if(!inv) throw new Error('Produit actif introuvable dans ce compte.');
+      if(inv.pendingClaimId){
+        if(button){button.innerHTML='<i class="fa-solid fa-clock fa-spin"></i> Demande en cours';}
+        alert('Une demande existe déjà pour ce produit. Elle attend la validation de l’administrateur.');
+        return;
+      }
+      const millis=value=>{
+        if(value && typeof value.toMillis==='function') return value.toMillis();
+        if(value && typeof value.toDate==='function') return value.toDate().getTime();
+        if(typeof value==='string' && isNaN(Number(value))) return Date.parse(value)||0;
+        return Number(value||0);
+      };
+      const now=Date.now(), last=millis(inv.lastClaimAt||inv.lastCheck||inv.activatedAt||inv.startTime);
+      if(!last) throw new Error('Date d’activation absente pour ce produit. Demandez à l’administrateur de vérifier le produit.');
+      const remaining=last+86400000-now;
+      if(remaining>0) throw new Error('Le délai de 24 heures n’est pas encore écoulé.');
+      const duration=Number(inv.durationDays||35), claimed=Number(inv.claimedDays||inv.creditedCycles||0), daily=Number(inv.dailyGain||0);
+      if(inv.status==='completed'||claimed>=duration) throw new Error('La durée de ce produit est terminée.');
+      if(!Number.isFinite(daily)||daily<=0) throw new Error('Le revenu journalier de ce produit est nul ou non configuré.');
+
+      // Même circuit de collection que les dépôts : la demande existe dans /deposits
+      // sans dépendre de l’autorisation d’écriture du membre sur son profil.
+      const requestRef=await addDoc(collection(db,'deposits'),{
+        requestType:'daily_revenue', type:'Réclamation revenu quotidien', status:'En cours',
+        userPhone:String(user.phone), phoneUser:String(user.phone), userName:String(freshUser.name||freshUser.nom||user.name||''),
+        uid:String(auth.currentUser.uid||freshUser.uid||''), userId:String(auth.currentUser.uid||freshUser.uid||''),
+        investmentId:String(investmentId), productName:String(inv.name||'Produit DCI'),
+        amount:daily, dailyGain:daily, day:claimed+1, durationDays:duration,
+        createdAt:serverTimestamp(), requestedAt:now, date:new Date(now).toLocaleString('fr-FR')
+      });
+
+      // Mise à jour du repère de demande si les règles le permettent. La demande est
+      // déjà enregistrée même si cette écriture secondaire est refusée par Firestore.
+      try{
+        const updatedInvestments=investments.map(v=>String(v.id||v.depositId||'')===String(investmentId)?{...v,pendingClaimId:requestRef.id,pendingClaimAt:now,pendingClaimDay:claimed+1}:v);
+        await updateDoc(userRef,{activeInvestments:updatedInvestments,updatedAt:serverTimestamp()});
+        freshUser.activeInvestments=updatedInvestments;
+        cacheUserDataSafely(freshUser);
+      }catch(profileWriteError){
+        console.warn('Demande enregistrée; repère pending du profil non modifié (règles Firestore):',profileWriteError);
+      }
+      if(button){button.innerHTML='<i class="fa-solid fa-clock fa-spin"></i> En attente de validation';button.disabled=true;}
+      // Rafraîchir le profil local sans annuler la demande déjà envoyée.
+      try{const latest=await getDoc(userRef);if(latest.exists()){cacheUserDataSafely(latest.data());updateDashboardUI();}}catch(_){ }
+      alert('Demande envoyée avec succès ! Elle est maintenant « En cours » dans le panneau administrateur. Le revenu sera crédité après approbation.');
+    }catch(e){
+      console.error('Réclamation quotidienne DCI:',e);
+      if(button){button.disabled=false;button.removeAttribute('aria-busy');button.innerHTML=originalButton||'<i class="fa-solid fa-hand-holding-dollar"></i> Réessayer';}
+      alert('La demande n’a pas été envoyée : '+(e?.message||'Erreur inconnue')+'\nVérifiez votre connexion et les règles Firestore de /deposits.');
+    }
+  };
+
   function checkDailyEarnings(){
-   // Sécurité : aucun rendement financier n’est crédité depuis le navigateur.
-   // Le compte à rebours indique l’échéance du cycle. Le crédit financier nécessite un règlement réel confirmé par un service serveur sécurisé.
+   // Aucun crédit financier depuis le navigateur. Pour un vrai versement automatique,
+   // utiliser une Cloud Function Firebase planifiée, sécurisée et anti-doublon.
    return;
   }
 
@@ -3044,12 +3137,31 @@ selectedPlanData = { name, amount, dailyGain };
     u.activeInvestments.forEach((inv, index) => {
      let el = document.getElementById(`inv-timer-${index}`);
      if(el){
-      let nextPayout = inv.lastCheck + (24 * 60 * 60 * 1000);
+      const timerMillis = value => value && typeof value.toMillis === 'function' ? value.toMillis() : (value && typeof value.toDate === 'function' ? value.toDate().getTime() : (typeof value === 'string' && isNaN(Number(value)) ? (Date.parse(value)||0) : Number(value||0)));
+      let nextPayout = timerMillis(inv.lastClaimAt || inv.lastCheck || inv.activatedAt || inv.startTime || 0) + 86400000;
       let diff = Math.max(0, nextPayout - Date.now());
       let h = Math.floor(diff / (1000 * 60 * 60));
       let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       let s = Math.floor((diff % (1000 * 60)) / 1000);
-      el.textContent = diff <= 0 ? 'Échéance atteinte' : `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      el.textContent = inv.pendingClaimId
+        ? 'En attente de validation'
+        : (diff <= 0
+          ? '00:00:00 — prêt à réclamer'
+          : `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`);
+      const area = document.getElementById(`inv-claim-area-${index}`);
+      const label = document.getElementById(`inv-timer-label-${index}`);
+      const duration = Number(inv.durationDays || 35);
+      const claimed = Number(inv.claimedDays || inv.creditedCycles || 0);
+      const daily = Number(inv.dailyGain || 0);
+      const invId = String(inv.id || inv.depositId || '');
+      const ready = diff <= 0 && !inv.pendingClaimId && claimed < duration && inv.status !== 'completed' && daily > 0 && !!invId;
+      if(area && ready && !area.querySelector('button')){
+        const safeId = invId.replace(/&/g,'&amp;').replace(/\"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        area.innerHTML = `<button class="claim-revenue-btn" data-investment-id="${safeId}" onclick="window.claimInvestmentRevenue(this.dataset.investmentId,this)"><i class="fa-solid fa-hand-holding-dollar"></i> Réclamer les revenus</button>`;
+      }else if(area && !ready){
+        const button=area.querySelector('button'); if(button) button.remove();
+      }
+      if(label) label.textContent = inv.pendingClaimId ? 'Demande envoyée — validation nécessaire' : (diff <= 0 ? 'Revenu disponible à réclamer' : 'Prochain cycle');
      }
     });
    }
@@ -3384,5 +3496,68 @@ button:disabled,.btn:disabled,[aria-disabled="true"]{background:#e8eff8 !importa
 /* Les boutons de fermeture restent lisibles dans leurs fenêtres. */
 .modal button,.country-picker button{color:#fff !important}
 </style>
+
+<div id="dciFaqModal" class="hidden dci-faq-overlay" role="dialog" aria-modal="true" aria-labelledby="dciFaqTitle">
+<div class="dci-faq-card">
+<div class="dci-faq-head"><div><span class="dci-faq-kicker">DCI • ASSISTANCE</span><h2 id="dciFaqTitle"><i class="fa-solid fa-circle-question"></i> Questions fréquentes</h2><p>Les réponses aux questions les plus courantes.</p></div><button type="button" class="dci-faq-close" onclick="closeDciFaq()" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div>
+<details open><summary>Comment créer mon compte ?</summary><p>Choisissez « Créer un compte », indiquez votre numéro de téléphone, créez un mot de passe et confirmez-le. Le code de parrainage est facultatif.</p></details>
+<details><summary>Comment effectuer un dépôt ?</summary><p>Choisissez un programme, consultez ses conditions, puis suivez les instructions affichées dans la rubrique Dépôt. Vérifiez le numéro bénéficiaire et conservez votre référence de transaction.</p></details>
+<details><summary>Quand mon programme est-il activé ?</summary><p>Un dépôt doit être vérifié et validé par l'administration. Ne considérez pas un programme comme actif tant que sa validation n'apparaît pas dans votre espace.</p></details>
+<details><summary>Où consulter mes dépôts et retraits ?</summary><p>Utilisez les raccourcis de l'accueil « Historique des dépôts » et « Historique des retraits », ou retrouvez-les dans votre espace personnel.</p></details>
+<details><summary>Comment fonctionne le parrainage ?</summary><p>Partagez votre lien personnel. Les membres sont répartis dans les niveaux 1, 2 et 3. Les taux affichés sont respectivement de 30 %, 1 % et 1 %. Toute commission dépend de l'enregistrement et de la validation effective de l'opération concernée.</p></details>
+<details><summary>J'ai oublié mon mot de passe : que faire ?</summary><p>La récupération par question secrète doit être vérifiée par un mécanisme sécurisé côté serveur. Si cette fonction n'est pas disponible, contactez le service client plutôt que de communiquer votre mot de passe ou votre réponse secrète.</p></details>
+<details><summary>Comment contacter l'assistance ?</summary><p>Ouvrez « Service client » dans votre espace. Le bouton WhatsApp mène à la communauté actuellement configurée. Le lien du canal Telegram officiel DCI reste à renseigner par l'administrateur.</p></details>
+<div class="dci-faq-note"><i class="fa-solid fa-shield-halved"></i> Prenez connaissance des conditions et des risques avant toute opération. Les projections affichées ne constituent pas une garantie de rendement.</div>
+<button class="dci-faq-done" type="button" onclick="closeDciFaq()">J'ai compris</button>
+</div>
+</div>
+
+
+<style id="dci-home-shortcuts-faq-style">
+.dci-home-shortcuts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 17px}
+.dci-shortcut{display:flex;align-items:center;gap:11px;min-width:0;min-height:66px;padding:11px;border:1px solid #d5e3f2;border-left:4px solid #0876d8;border-radius:15px;background:linear-gradient(145deg,#fff,#f2f7ff);color:#123b70;text-align:left;box-shadow:0 6px 17px rgba(6,55,105,.07)}
+.dci-shortcut:nth-child(2n){border-left-color:#ce1021;border-top:2px solid #f7d618}
+.dci-shortcut>i{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:11px;background:#eaf3ff;color:#0757a6;font-size:15px}
+.dci-shortcut:nth-child(2n)>i{background:#fff0f1;color:#ce1021}
+.dci-shortcut span{min-width:0}.dci-shortcut b{display:block;font-size:11px;line-height:1.3}.dci-shortcut small{display:block;margin-top:3px;color:#667d96;font-size:9.5px;line-height:1.3}
+.dci-shortcut:active{transform:scale(.98)}
+.team-whatsapp-share{width:100%;margin-top:10px;min-height:45px;border:1px solid #0876d8!important;border-radius:12px!important;background:linear-gradient(110deg,#0876d8,#064b9b)!important;color:#fff!important;font-weight:850!important}
+.team-whatsapp-share i{margin-right:7px;color:#f7d618}
+.dci-faq-overlay{position:fixed;inset:0;z-index:100010;display:flex;align-items:center;justify-content:center;padding:14px;background:rgba(7,20,38,.72);backdrop-filter:blur(6px)}
+.dci-faq-overlay.hidden{display:none!important}
+.dci-faq-card{width:min(100%,560px);max-height:90vh;overflow:auto;padding:19px;border:1px solid #d5e3f2;border-top:5px solid #0876d8;border-bottom:4px solid #f7d618;border-radius:21px;background:#fff;box-shadow:0 24px 70px rgba(0,0,0,.25);color:#102b4e}
+.dci-faq-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}
+.dci-faq-kicker{font-size:9px;font-weight:900;letter-spacing:1px;color:#ce1021}
+.dci-faq-head h2{margin:4px 0;font-size:19px;color:#064b9b}
+.dci-faq-head h2 i{color:#0876d8;margin-right:5px}
+.dci-faq-head p{margin:0;color:#667d96;font-size:11px}
+.dci-faq-close{width:36px;height:36px;flex:0 0 36px;border:1px solid #d5e3f2!important;border-radius:11px!important;background:#edf5ff!important;color:#0757a6!important}
+.dci-faq-card details{margin:8px 0;border:1px solid #dce8f5;border-radius:12px;background:#f8fbff;overflow:hidden}
+.dci-faq-card summary{padding:12px 13px;cursor:pointer;font-size:12px;font-weight:850;color:#123b70;list-style:none}
+.dci-faq-card summary::-webkit-details-marker{display:none}
+.dci-faq-card summary:after{content:"+";float:right;color:#ce1021;font-size:17px;line-height:12px}
+.dci-faq-card details[open] summary:after{content:"−"}
+.dci-faq-card details p{margin:0;padding:0 13px 13px;color:#536b86;font-size:11px;line-height:1.6}
+.dci-faq-note{display:flex;gap:8px;margin:13px 0;padding:11px;border:1px solid #f0d98a;border-radius:12px;background:#fff9df;color:#6b5511;font-size:10.5px;line-height:1.5}
+.dci-faq-note i{color:#0757a6}
+.dci-faq-done{width:100%;min-height:45px;border:2px solid #f7d618!important;border-radius:12px!important;background:linear-gradient(110deg,#0876d8,#064b9b)!important;color:#fff!important;font-weight:900!important}
+.telegram-float{background:#168bd2!important;border:2px solid #f7d618!important}
+@media(max-width:480px){.dci-home-shortcuts{gap:8px}.dci-shortcut{padding:9px;gap:8px;min-height:64px}.dci-shortcut>i{width:30px;height:30px;flex-basis:30px}.dci-shortcut b{font-size:10px}.dci-faq-card{padding:15px;border-radius:18px}}
+</style>
+<script id="dci-home-shortcuts-faq-functions">
+(function(){
+window.openDciFaq=function(){document.getElementById('dciFaqModal')?.classList.remove('hidden');};
+window.closeDciFaq=function(){document.getElementById('dciFaqModal')?.classList.add('hidden');};
+document.addEventListener('click',function(e){const modal=document.getElementById('dciFaqModal');if(modal&&e.target===modal)window.closeDciFaq();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')window.closeDciFaq();});
+window.shareDciReferralWhatsApp=function(){
+ const input=document.getElementById('refLinkDisplay'),link=input?input.value.trim():'';
+ if(!link){alert("Votre lien d'invitation n'est pas encore disponible. Connectez-vous d'abord.");return;}
+ const message="🇨🇩 Découvrez DCI — Développement Congo Invest. Consultez les programmes, les conditions et les risques avant toute décision.\\n\\nVoici mon lien d’invitation : "+link;
+ window.open('https://wa.me/?text='+encodeURIComponent(message),'_blank','noopener');
+};
+})();
+</script>
+
 </body>
 </html>
